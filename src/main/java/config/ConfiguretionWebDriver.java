@@ -20,11 +20,16 @@ public class ConfiguretionWebDriver {
     static public WebDriver createDriver(WebDrivers webDrivers) {
 
         switch (webDrivers) {
-            case CHROME -> createChrome();
-            case CHROME_INCOGNITO -> createChromeIncognito();
-            case FIREFOX -> createFireFox();
-            case PROXYCHROME -> createProxyChrome();
-            case BONYGARSIA -> createDriverBony();
+            case CHROME : createChrome();
+            break;
+            case CHROME_INCOGNITO : createChromeIncognito();
+            break;
+            case FIREFOX : createFireFox();
+            break;
+            case PROXYCHROME : createProxyChrome();
+            break;
+            case BONYGARSIA : createDriverBony();
+            break;
         }
         return driver;
     }

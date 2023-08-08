@@ -10,13 +10,13 @@ public class MainPageLisener extends BaseClass implements ITestListener  {
 
     @Override
     public void onTestFailure(ITestResult result) {
-        ScreenShoT.getScreenShot(driver, result.getTestName());
+        ScreenShoT.getScreenShot( result.getTestName());
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
         if(result.getMethod().getMethodName().equals("testQuery")){
-            ScreenShoT.getWebElementPNG(driver.findElement(By.id("coursesMenuDesktop")),driver,result.getTestName());
+            ScreenShoT.getWebElementPNG(driver.findElement(By.id("coursesMenuDesktop")),result.getTestName());
         }
     }
 }

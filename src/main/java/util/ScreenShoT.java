@@ -1,5 +1,7 @@
 package util;
 
+import config.BaseClass;
+import io.qameta.allure.Attachment;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 
@@ -10,8 +12,10 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class ScreenShoT {
-    public static void getScreenShot(WebDriver driver, String fileName) {
+public class ScreenShoT extends BaseClass {
+
+    @Attachment(value = "Page screenshot", type = "image/png")
+    public static byte[] getScreenShot(String fileName) {
         File file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         File dest = new File("pictures/failures/" + new SimpleDateFormat("MM_dd_HH-mm-ss").format(Calendar.getInstance().getTime()) + fileName + ".png");
         try {
@@ -19,17 +23,19 @@ public class ScreenShoT {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 
-    public static void getWebElementPNG(WebElement ele, WebDriver driver, String fileName) {   // create PNG
 
+    @Attachment(value = "Page screenshot", type = "image/png")
+    public static byte[] getWebElementPNG(WebElement ele, String fileName) {   // create PNG
 // Get entire page screenshot
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         BufferedImage fullImg;
         try {
             fullImg = ImageIO.read(screenshot);
         } catch (IOException e) {
-            return;
+            return null;
 
         }
 
@@ -46,7 +52,7 @@ public class ScreenShoT {
         try {
             ImageIO.write(eleScreenshot, "png", screenshot);
         } catch (IOException e) {
-            return;
+            return null;
         }
 
 // Copy the element screenshot to disk
@@ -56,6 +62,6 @@ public class ScreenShoT {
             FileUtils.copyFile(screenshot, screenshotLocation);
         } catch (IOException e) {
         }
-
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 }

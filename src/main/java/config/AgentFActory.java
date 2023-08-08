@@ -3,8 +3,10 @@ package config;
 public class AgentFActory {
     public static void create(Agents agents){
         switch (agents){
-            case ANDROIDEN -> createAndroid();
-            case UkraineLang -> createlang();
+            case ANDROIDEN : createAndroid();
+            break;
+            case UkraineLang : createlang();
+            break;
         }
     }
 

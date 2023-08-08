@@ -1,5 +1,7 @@
 package pages;
 
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,10 +18,9 @@ public class MainPage {
     @FindBy(xpath = "//div[@data-id=\"result\"]//p[@class=\"course-label_name\"]")
     List<WebElement> responseList;
 
-    public MainPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-    }
 
+
+    @Step("Query string : {query}")
     public List<String> chekResponseList(String query) throws InterruptedException {
         if (!searchField.isDisplayed()) {
             courseButton.click();
@@ -31,6 +32,7 @@ public class MainPage {
         for (WebElement l : responseList) {
             list.add(l.getText());
         }
+        Allure.addAttachment("My responce", list.toString());
         return list;
     }
 }
